@@ -18,14 +18,23 @@ public class Main {
         humans.add(new Human("Jhon7", 49, "7", "Smith7"));
 
 
+        Map<String, List<String>> mapOne = humans.stream()
+                .peek(human -> human.setAge(human.getAge() + 1))
+                .filter(human -> human.getAge() >= 18)
+                .collect(Collectors.toMap(Human::getId, human -> Arrays.asList(human.getName(),human.getSurname())));
+
+        System.out.println(mapOne);
 
 
-            Map<String, List<String>> map = humans.stream()
-                    .peek(human -> human.setAge(human.getAge() + 1))
-                    .filter(human -> human.getAge() >= 18)
-                    .collect(Collectors.toMap(Human::getId, human -> Arrays.asList(human.getName(),human.getSurname())));
+        Map<String, String> mapTwo = humans.stream()
+                .peek(human -> human.setAge(human.getAge() + 1))
+                .filter(human -> human.getAge() >= 18)
+                .collect(Collectors.toMap(Human::getId, human -> human.getName()+human.getSurname()));
 
-        System.out.println(map);
+        System.out.println(mapTwo);
+
+
+
         }
     }
 
